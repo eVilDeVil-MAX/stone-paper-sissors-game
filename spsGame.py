@@ -1,50 +1,65 @@
-import random 
+import random
 
-component = ['stone' , 'paper', 'scissors']
-count = 0
-count2 = 0
-for i in range(0,3):
-    print(f"these are ur options {component}" )
-    userChoice=input("enter what you choice: ")
-    pythonChoice= random.choice(component)
-    if userChoice == 'stone' and pythonChoice == 'scissors':
-        print("congrats computer wins this time :(.")
-        count += 1
-    elif userChoice == 'scissors' and pythonChoice == 'scissors':
-        print('its a tie 0.0')
+component = ['rock', 'paper', 'scissors']
+user_wins = 0
+python_wins = 0
+draw_count = 0
+win_text = ['You win!',
+            "hey guess what , you won :). ",
+            'yee, u won ',
+            ]
+lose_text = ['You lose!',
+             "congrats computer wins this time :(.",
+             "oh no python won this time :(",
+             'shoot python won ',
+             " u loose :(."
+             ]
+draw_text = ['Draw!',
+             'its a tie 0.0',
+             "its a tie.",
+             'its a tie nobody loses.',
+             'nobody wins its a tie :o'
+             ]
 
-    elif userChoice == 'paper' and pythonChoice == 'scissors':
-        print("oh no python won this time :(")
-        count2 += 1
-    elif userChoice == 'stone' and pythonChoice == 'stone':
-        print("its a tie.")
+games = int(input('How many game you wanna play? '))
+print()
+for i in range(games):
+    print(f"these are ur options ({', '.join(component)})")
+    userChoice = input("enter what you choice: ")
+    pythonChoice = random.choice(component)
+    print(f"python chose: {pythonChoice}")
 
-    elif userChoice == 'scissors' and  pythonChoice == 'stone':
-        print('shoot python won ')
-        count2 += 1
-    elif userChoice == 'paper' and pythonChoice == 'stone':
-        print("hey guess what , you won :). ")
-        count += 1
-    elif userChoice == 'stone' and pythonChoice == 'stone':
-        print('its a tie nobody loses.')
+    if userChoice == 'rock':
+        if pythonChoice == 'scissors':
+            print(random.choice(win_text))
+            user_wins +=1
+        if pythonChoice == 'paper':
+            print(random.choice(lose_text))
+            python_wins +=1
 
-    elif userChoice == 'scissors' and pythonChoice == 'paper':
-        print('yee, u won ')
-        count =+ 1 
-    elif userChoice == 'stone' and pythonChoice == 'paper':
-        print(" u loose :(.")
-        count2=+1
-    elif userChoice == 'paper' and pythonChoice == 'paper':
-        print('nobody wins its a tie :o')
-    
+    if userChoice == 'paper':
+        if pythonChoice == 'rock':
+            print(random.choice(win_text))
+            user_wins += 1
+        if pythonChoice == 'scissors':
+            print(random.choice(lose_text))
+            python_wins += 1
+
+    if userChoice == 'scissors':
+        if pythonChoice == 'paper':
+            print(random.choice(win_text))
+            user_wins += 1
+        if pythonChoice == 'rock':
+            print(random.choice(lose_text))
+            python_wins += 1
+
+    if userChoice == pythonChoice:
+        print('Draw!')
+        draw_count +=1
+    print()
 
 
 print("now results time :)")
-print(f"your score {count} and python score {count2} ") 
-if count2 > count:
-    print("PYTHON WON ")
-elif count2 < count:
-    print("u won the game CONGRATS BUDDY :).")
-else:
-    print("the game is tied u both played well.")
-
+print(f"your score {user_wins}")
+print(f"python score {python_wins}")
+print(f"draws {draw_count}")
